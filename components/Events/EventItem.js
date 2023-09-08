@@ -1,4 +1,7 @@
-import Link from 'next/link'
+import classes from './EventItem.module.css'
+import Button from '../ui/Button'
+import IconDate from '../icons/Date'
+import IconAddress from '../icons/Address'
 
 export default function EventItem({ id, title, description, location, date, image }) {
   const humanReadableDate = new Date(date).toLocaleDateString('en-US', {
@@ -8,21 +11,20 @@ export default function EventItem({ id, title, description, location, date, imag
   })
   const exploreLink = `/events/${id}`
   return (
-    <li>
-      <img className='event-image' src={`/${image}`} alt={title} />
-      <div>
-        <h2>{title}</h2>
-        <div>
+    <li className={classes.item}>
+      <img className={classes.banner} src={`/${image}`} alt={title} />
+      <div className={classes.content}>
+        <h2 className={classes.title}>{title}</h2>
+        <div className={classes.date}>
+          <IconDate />
           <time>{humanReadableDate}</time>
         </div>
-        <div>
-          <address>{location.replace(',', '\n')}</address>
+        <div className={classes.address}>
+          <IconAddress />
+          <address className={classes.address}>{location.replace(', ', '\n')}</address>
         </div>
-        <div>
-          <p>{description}</p>
-        </div>
-        <div>
-          <Link href={exploreLink}>Explore Event</Link>
+        <div className={classes.actions}>
+          <Button link={exploreLink}>Explore Event</Button>
         </div>
       </div>
     </li>

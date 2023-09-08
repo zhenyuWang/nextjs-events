@@ -1,7 +1,8 @@
+import classes from './EventList.module.css'
 import EventItem from './EventItem'
 export default function EventList({ events }) {
   return (
-    <ul>
+    <ul className={classes.list}>
       {events.map((event) => (
         <EventItem
           key={event.id}
