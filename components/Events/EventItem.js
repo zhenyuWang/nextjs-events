@@ -3,7 +3,7 @@ import Button from '../ui/Button'
 import IconDate from '../icons/Date'
 import IconAddress from '../icons/Address'
 
-export default function EventItem({ id, title, description, location, date, image }) {
+export default function EventItem({ id, title, location, date, image }) {
   const humanReadableDate = new Date(date).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
@@ -12,7 +12,9 @@ export default function EventItem({ id, title, description, location, date, imag
   const exploreLink = `/events/${id}`
   return (
     <li className={classes.item}>
-      <img className={classes.banner} src={`/${image}`} alt={title} />
+      <div className={classes['img-box']}>
+        <img src={`/${image}`} alt={title} />
+      </div>
       <div className={classes.content}>
         <h2 className={classes.title}>{title}</h2>
         <div className={classes.date}>
