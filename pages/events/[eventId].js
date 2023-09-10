@@ -3,6 +3,7 @@ import { getEventById } from '@/dummy-data'
 import classes from './eventId.module.css'
 import IconDate from '@/components/icons/Date'
 import IconAddress from '@/components/icons/Address'
+import { getHumanReadableDate } from '@/utils'
 
 export default function EventDetailPage() {
   const router = useRouter()
@@ -12,11 +13,7 @@ export default function EventDetailPage() {
   if (!event) {
     return <h1>No event found!</h1>
   }
-  const humanReadableDate = new Date(event.date).toLocaleDateString('en-US', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  })
+  const humanReadableDate = getHumanReadableDate(event.date)
   return (
     <>
       <div className={classes.banner}>{event.title}</div>
