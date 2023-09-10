@@ -1,7 +1,7 @@
 import classes from './EventItem.module.css'
-import Button from '../ui/Button'
-import IconDate from '../icons/Date'
-import IconAddress from '../icons/Address'
+import Button from '@/components/ui/Button'
+import IconDate from '@/components/icons/Date'
+import IconAddress from '@/components/icons/Address'
 
 export default function EventItem({ id, title, location, date, image }) {
   const humanReadableDate = new Date(date).toLocaleDateString('en-US', {
