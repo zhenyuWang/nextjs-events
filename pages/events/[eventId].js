@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import { getEventById } from '@/dummy-data'
 import classes from './eventId.module.css'
+import Alert from '@/components/ui/Alert'
+import Button from '@/components/ui/Button'
 import IconDate from '@/components/icons/Date'
 import IconAddress from '@/components/icons/Address'
 import { getHumanReadableDate } from '@/utils'
@@ -11,7 +13,14 @@ export default function EventDetailPage() {
   const event = getEventById(id)
 
   if (!event) {
-    return <h1>No event found!</h1>
+    return (
+      <>
+        <Alert>No event found!</Alert>
+        <div className='t-center font-size-14'>
+          <Button link='/events'>show all events</Button>
+        </div>
+      </>
+    )
   }
   const humanReadableDate = getHumanReadableDate(event.date)
   return (
