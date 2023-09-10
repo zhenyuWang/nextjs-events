@@ -1,0 +1,21 @@
+.header {
+  padding: 0 10rem;
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+}
+.logo {
+  line-height: 6rem;
+}
+.logo > a {
+  font-size: 3rem;
+  color: rgb(5, 236, 248);
+}
+.navigation {
+  line-height: 6rem;
+}
+.navigation > ul > li > a {
+  font-size: 2rem;
+  color: rgb(15, 191, 236);
+}
