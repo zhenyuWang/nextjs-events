@@ -1,23 +1,21 @@
-import { useRouter } from 'next/router'
-import { getEventById } from '@/dummy-data'
+import { getEventById, getFeaturedEvents } from '@/helpers/api-utils'
 import classes from './eventId.module.css'
-import Alert from '@/components/ui/Alert'
-import Button from '@/components/ui/Button'
+// import Alert from '@/components/ui/Alert'
+// import Button from '@/components/ui/Button'
 import IconDate from '@/components/icons/Date'
 import IconAddress from '@/components/icons/Address'
 import { getHumanReadableDate } from '@/utils'
 
-export default function EventDetailPage() {
-  const router = useRouter()
-  const id = router.query.eventId
-  const event = getEventById(id)
-
+export default function EventDetailPage({event}) {
   if (!event) {
     return (
       <>
-        <Alert>No event found!</Alert>
+        {/* <Alert>No event found!</Alert>
         <div className='t-center font-size-14'>
           <Button link='/events'>show all events</Button>
+        </div> */}
+        <div className='t-center font-size-14'>
+          Loading...
         </div>
       </>
     )
@@ -43,4 +41,24 @@ export default function EventDetailPage() {
       <div className={classes.description}>{event.description}</div>
     </>
   )
+}
+
+export async function getStaticProps(context) {
+  const { eventId } = context.params
+  const event = await getEventById(eventId)
+  return {
+    props: {
+      event,
+    },
+    revalidate: 60,
+  }
+}
+
+export async function getStaticPaths() {
+  const events = await getFeaturedEvents()
+  const paths = events.map((event) => ({ params: { eventId: event.id } }))
+  return {
+    paths,
+    fallback: true,
+  }
 }
