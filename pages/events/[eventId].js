@@ -2,6 +2,7 @@ import { getEventById, getFeaturedEvents } from '@/helpers/api-utils'
 import classes from './eventId.module.css'
 // import Alert from '@/components/ui/Alert'
 // import Button from '@/components/ui/Button'
+import Head from 'next/head'
 import IconDate from '@/components/icons/Date'
 import IconAddress from '@/components/icons/Address'
 import { getHumanReadableDate } from '@/utils'
@@ -23,6 +24,10 @@ export default function EventDetailPage({event}) {
   const humanReadableDate = getHumanReadableDate(event.date)
   return (
     <>
+      <Head>
+        <title>{ event.title }</title>
+        <meta name='description' content={event.description} />
+      </Head>
       <div className={classes.banner}>{event.title}</div>
       <div className={classes.content}>
         <div className={classes['img-box']}>

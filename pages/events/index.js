@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import useSWR from 'swr'
 import { getAllEvents } from '@/helpers/api-utils'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import EventSearch from '@/components/Events/EventSearch'
 import EventList from '@/components/Events/EventList'
 
@@ -38,6 +39,10 @@ export default function AllEventsPage(props) {
 
   return (
     <>
+      <Head>
+        <title>All Events</title>
+        <meta name='description' content='Find a lot of great events that allow you to evolve...' />
+      </Head>
       <EventSearch onSearch={findEventsHandler} />
       <EventList events={events} />
     </>

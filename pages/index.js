@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { getFeaturedEvents } from '@/helpers/api-utils'
 // import { useState, useEffect } from 'react'
 // import useSWR from 'swr'
@@ -31,6 +32,10 @@ export default function HomePage(props) {
   // }
   return (
     <>
+      <Head>
+        <title>NextJS Events</title>
+        <meta name='description' content='Find a lot of great events that allow you to evolve...' />
+      </Head>
       <ResultTitle title='Feature Events' />
       <EventList events={props.events} />
     </>
