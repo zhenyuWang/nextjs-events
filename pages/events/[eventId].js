@@ -3,11 +3,12 @@ import classes from './eventId.module.css'
 // import Alert from '@/components/ui/Alert'
 // import Button from '@/components/ui/Button'
 import Head from 'next/head'
+import Image from 'next/image'
 import IconDate from '@/components/icons/Date'
 import IconAddress from '@/components/icons/Address'
 import { getHumanReadableDate } from '@/utils'
 
-export default function EventDetailPage({event}) {
+export default function EventDetailPage({ event }) {
   if (!event) {
     return (
       <>
@@ -15,9 +16,7 @@ export default function EventDetailPage({event}) {
         <div className='t-center font-size-14'>
           <Button link='/events'>show all events</Button>
         </div> */}
-        <div className='t-center font-size-14'>
-          Loading...
-        </div>
+        <div className='t-center font-size-14'>Loading...</div>
       </>
     )
   }
@@ -25,20 +24,32 @@ export default function EventDetailPage({event}) {
   return (
     <>
       <Head>
-        <title>{ event.title }</title>
-        <meta name='description' content={event.description} />
+        <title>{event.title}</title>
+        <meta
+          name='description'
+          content={event.description}
+        />
       </Head>
       <div className={classes.banner}>{event.title}</div>
       <div className={classes.content}>
         <div className={classes['img-box']}>
-          <img src={`/${event.image}`} alt={event.title} />
+          {/* https://nextjs.org/docs/pages/api-reference/components/image */}
+          <Image
+            src={`/${event.image}`}
+            alt={event.title}
+            width={300}
+            height={140}
+          />
         </div>
         <div className={classes['info-content']}>
           <IconDate color='rgb(58, 190, 159)' />
           <br />
           <time>{humanReadableDate}</time>
           <br />
-          <IconAddress className={classes['icon-address']} color='rgb(58, 190, 159)' />
+          <IconAddress
+            className={classes['icon-address']}
+            color='rgb(58, 190, 159)'
+          />
           <br />
           <address className={classes.address}>{event.location.replace(', ', '\n')}</address>
         </div>
