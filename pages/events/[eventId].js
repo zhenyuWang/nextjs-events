@@ -7,6 +7,7 @@ import Image from 'next/image'
 import IconDate from '@/components/icons/Date'
 import IconAddress from '@/components/icons/Address'
 import { getHumanReadableDate } from '@/utils'
+import Comments from '../../components/input/comments'
 
 export default function EventDetailPage({ event }) {
   if (!event) {
@@ -55,6 +56,7 @@ export default function EventDetailPage({ event }) {
         </div>
       </div>
       <div className={classes.description}>{event.description}</div>
+      <Comments eventId={event.id} />
     </>
   )
 }

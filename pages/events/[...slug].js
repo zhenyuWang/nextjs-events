@@ -16,7 +16,7 @@ export default function FilteredEventsPage() {
     if (!filterData) return
     const events = getFilteredEvents({ year: filterData[0] * 1, month: filterData[1] * 1 })
     setLoadedEvents(events)
-  }, filterData || [0, 0])
+  }, [filterData])
   let pageHeadData = (
     <Head>
       <title>Filtered Events</title>

@@ -4,6 +4,7 @@ import { getFeaturedEvents } from '@/helpers/api-utils'
 // import useSWR from 'swr'
 import ResultTitle from '@/components/Events/ResultTitle'
 import EventList from '@/components/Events/EventList'
+import NewsletterRegistration from '../components/input/newsletter-registration'
 
 export default function HomePage(props) {
   // const [events, setEvents] = useState(props.events)
@@ -34,9 +35,13 @@ export default function HomePage(props) {
     <>
       <Head>
         <title>NextJS Events</title>
-        <meta name='description' content='Find a lot of great events that allow you to evolve...' />
+        <meta
+          name='description'
+          content='Find a lot of great events that allow you to evolve...'
+        />
       </Head>
       <ResultTitle title='Feature Events' />
+      <NewsletterRegistration />
       <EventList events={props.events} />
     </>
   )
