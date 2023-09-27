@@ -42,7 +42,13 @@ async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const documents = await getAllDocuments(client, 'comments', { _id: -1 })
-      res.status(200).json({ comments: documents })
+      let comments = []
+      if (documents?.length) {
+        comments = documents.filter((doc) => {
+          return doc.eventId === eventId
+        })
+      }
+      res.status(200).json({ comments })
     } catch (error) {
       res.status(500).json({ message: 'Getting comments failed.' })
     }
