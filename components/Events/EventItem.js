@@ -20,6 +20,7 @@ export default function EventItem({ id, title, location, date, image }) {
           alt={title}
           width={300}
           height={140}
+          priority={false}
         />
       </div>
       <div className={classes.content}>
