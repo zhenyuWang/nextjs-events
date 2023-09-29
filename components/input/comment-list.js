@@ -1,8 +1,6 @@
 import classes from './comment-list.module.css'
 
-function CommentList(props) {
-  const { items } = props
-
+function CommentList({ items }) {
   return (
     <ul className={classes.comments}>
       {items.length ? (

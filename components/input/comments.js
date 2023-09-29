@@ -10,6 +10,7 @@ function Comments(props) {
 
   const [showComments, setShowComments] = useState(false)
   const [comments, setComments] = useState([])
+  const [isFetchingComments, setIsFetchingComments] = useState(false)
   const notificationCtx = useContext(NotificationContext)
 
   useEffect(() => {
@@ -19,6 +20,7 @@ function Comments(props) {
         message: 'Getting comments for current event.',
         status: 'pending',
       })
+      setIsFetchingComments(true)
       fetch('/api/comments/' + eventId)
         .then((response) => {
           if (response.ok) {
@@ -30,6 +32,7 @@ function Comments(props) {
           })
         })
         .then((data) => {
+          setIsFetchingComments(false)
           data.comments && setComments(data.comments)
           notificationCtx.showNotification({
             title: 'Success!',
@@ -40,7 +43,7 @@ function Comments(props) {
         .catch((error) => {
           notificationCtx.showNotification({
             title: 'Error!',
-            message: error.message,
+            message: error.message || 'Something went wrong!',
             status: 'error',
           })
         })
@@ -53,6 +56,11 @@ function Comments(props) {
   }
 
   function addCommentHandler(commentData) {
+    notificationCtx.showNotification({
+      title: 'Sending comment...',
+      message: 'Your comment is currently being stored into a database.',
+      status: 'pending',
+    })
     fetch('/api/comments/' + eventId, {
       method: 'POST',
       body: JSON.stringify(commentData),
@@ -72,14 +80,14 @@ function Comments(props) {
       .then(() => {
         notificationCtx.showNotification({
           title: 'Success!',
-          message: 'Successfully added the comment!',
+          message: 'Your comment was saved!',
           status: 'success',
         })
       })
       .catch((error) => {
         notificationCtx.showNotification({
           title: 'Error!',
-          message: error.message,
+          message: error.message || 'Something went wrong!',
           status: 'error',
         })
       })
@@ -89,7 +97,8 @@ function Comments(props) {
     <section className={classes.comments}>
       <button onClick={toggleCommentsHandler}>{showComments ? 'Hide' : 'Show'} Comments</button>
       {showComments && <NewComment onAddComment={addCommentHandler} />}
-      {showComments && <CommentList items={comments} />}
+      {showComments && !isFetchingComments && <CommentList items={comments} />}
+      {showComments && isFetchingComments && <p>Loading...</p>}
     </section>
   )
 }

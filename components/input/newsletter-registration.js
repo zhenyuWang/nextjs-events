@@ -42,7 +42,7 @@ function NewsletterRegistration() {
       .catch((error) => {
         notificationCtx.showNotification({
           title: 'Error!',
-          message: error.message,
+          message: error.message || 'Something went wrong!',
           status: 'error',
         })
       })
